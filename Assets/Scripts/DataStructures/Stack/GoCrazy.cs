@@ -5,11 +5,10 @@ using System.Collections;
 public class GoCrazy : MonoBehaviour {
 
     public Text crazyText;
-    int[] testArray;
 
     // Use this for initialization
 	void Start () {
-	
+	    
 	}
 	
 	// Update is called once per frame
@@ -19,6 +18,8 @@ public class GoCrazy : MonoBehaviour {
 
     public void GoingCrazy()
     {
-        crazyText.text = "It went crazy";
+        string crazy = StackManager.getCurrentStackManager().toString();
+
+       crazyText.text = "tttt "+crazy +"  It went crazy";
     }
 }
