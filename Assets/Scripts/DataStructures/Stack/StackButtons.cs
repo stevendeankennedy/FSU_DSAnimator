@@ -50,7 +50,7 @@ public class StackButtons : MonoBehaviour {
     {
         string crazy = StackManager.getCurrentStackManager().toString();
 
-        crazyText.text = "tttt " + crazy + "  It went crazy   "+ StackManager.getCurrentStackManager().returnTop();
+        crazyText.text = "tttt " + crazy + "  It went crazy   "+ StackManager.getCurrentStackManager().numberOfElements();
         messageToUser.text = "";
     }
 }

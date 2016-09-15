@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class StackManager : MonoBehaviour {
 
     // This list will represent the stack in the Stack Scene and it will contain all the elements that will be displayed in the scene
-    public ArrayList mainStack = new ArrayList();
+    public List<string> mainStack = new List<string>();
     int top = 0;
     public static StackManager currentStack;
 
@@ -23,7 +24,7 @@ public class StackManager : MonoBehaviour {
     }
 
     //adds and element to the beggining of the stack
-    public void push(object newElement)
+    public void push(string newElement)
     {
         if (newElement != null && newElement+"" != "")
         {
@@ -40,7 +41,7 @@ public class StackManager : MonoBehaviour {
     }
 
     // returns the stack
-    public ArrayList returnStack()
+    public List<string> returnStack()
     {
         return getCurrentStackManager().mainStack;
     }
@@ -76,8 +77,14 @@ public class StackManager : MonoBehaviour {
         return isEmpty;
     }
 
-    public int returnTop()
+    public int numberOfElements()
     {
         return getCurrentStackManager().top;
+    }
+
+    public string returnLastElement()
+    {
+        string ob = getCurrentStackManager().mainStack[top - 1];
+        return ob;
     }
 }
