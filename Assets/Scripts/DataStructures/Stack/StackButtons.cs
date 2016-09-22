@@ -43,14 +43,18 @@ public class StackButtons : MonoBehaviour {
         {
             StackManager.getCurrentStackManager().pop();
         }
-
     }
 
-    public void GoingCrazy()
-    {
-        string crazy = StackManager.getCurrentStackManager().toString();
+	public void resetStack() //pop everything
+	{
+		if (StackManager.getCurrentStackManager().isSTackEmpty())
+		{
+			messageToUser.text = "The Stack is Empty";
+		}
+		else
+		{
+			StackManager.getCurrentStackManager().resetStack();
+		}
 
-        crazyText.text = "tttt " + crazy + "  It went crazy   "+ StackManager.getCurrentStackManager().numberOfElements();
-        messageToUser.text = "";
-    }
+	}
 }
