@@ -373,7 +373,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 0}
-  crazyText: {fileID: 0}
   messageToUser: {fileID: 0}
 --- !u!114 &11416554
 MonoBehaviour:
@@ -493,7 +492,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 0}
-  crazyText: {fileID: 0}
   messageToUser: {fileID: 0}
 --- !u!114 &11419916
 MonoBehaviour:
@@ -668,7 +666,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 11482508}
-  crazyText: {fileID: 0}
   messageToUser: {fileID: 11469346}
 --- !u!114 &11440774
 MonoBehaviour:

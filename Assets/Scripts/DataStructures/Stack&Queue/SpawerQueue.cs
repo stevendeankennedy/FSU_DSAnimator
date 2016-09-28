@@ -2,15 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class SpwanerStack : MonoBehaviour {
+public class SpawerQueue : MonoBehaviour {
 
 	//Will containe different types of chest (same function different sprite)
-    public StackPiece[] stackPieces;
-    //the maximun size of the stack
+	public StackPiece[] QueueCars;
+	//the maximun size of the stack
 	public int poolSize;
-    int elementsWeRememberInStack = 0;
-    int elementsCurrentlyInStacK;
-	public StackPiece[] ch;
+	int elementsWeRememberInStack = 0;
+	int elementsCurrentlyInStacK;
+	public StackPiece[] cars;
 
 	public GameObject Spawner;
 	public GameObject[] stackinground = new GameObject[5];
@@ -26,40 +26,42 @@ public class SpwanerStack : MonoBehaviour {
 
 
 	// this list will contain the pieces (chest/gameobject) that will represent each part of the stack
-    private LinkedList<StackPiece> pool;
+	private LinkedList<StackPiece> pool;
+
 
 	// Use this for initialization
 	void Start () {
-
+	
 		currentPosition = originalPosition;
 
 		//we fill the list with empty stackpieces with default information.
-        pool = new LinkedList<StackPiece>();
-        for (int i = 0; i < poolSize; i++)
-        {
-            int rNum = Random.Range(0, stackPieces.Length);
-            StackPiece clone = Instantiate<StackPiece>(stackPieces[rNum]);
-            clone.gameObject.SetActive(false);
-            clone.transform.SetParent(this.transform);
+		pool = new LinkedList<StackPiece>();
+		for (int i = 0; i < poolSize; i++)
+		{
+			int rNum = Random.Range(0, QueueCars.Length);
+			StackPiece clone = Instantiate<StackPiece>(QueueCars[rNum]);
+			clone.gameObject.SetActive(false);
+			clone.transform.SetParent(this.transform);
 			clone.transform.position = currentPosition;
-            pool.AddLast(clone);
-        }
+			pool.AddLast(clone);
+		}
 		for (int i = 1; i < 5; i++) 
 		{
 			stackinground [i].gameObject.SetActive (false);
 		}
-    }
-	
+	}
+
+
 	// Update is called once per frame
 	void Update ()
-    {
+	{
 		// this will constantly check if the user uses the pop or push function in the GUI
-        elementsCurrentlyInStacK  = StackManager.getCurrentStackManager().numberOfElements();
-        if (elementsWeRememberInStack != elementsCurrentlyInStacK)
-        {
-            //something has changed in the stack, we need to animate it
-            if (elementsWeRememberInStack > elementsCurrentlyInStacK)
-            {
+		elementsCurrentlyInStacK  = QueueManager.getQueueManager().queueList.size();
+		if (elementsWeRememberInStack != elementsCurrentlyInStacK)
+		{
+			//something has changed in the stack, we need to animate it
+			if (elementsWeRememberInStack > elementsCurrentlyInStacK)
+			{
 				if (elementsCurrentlyInStacK == 0)
 				{
 					//if there are zero elements in the stack either the stack was reset or
@@ -74,13 +76,13 @@ public class SpwanerStack : MonoBehaviour {
 					elementsWeRememberInStack = elementsCurrentlyInStacK;
 				}
 			}
-            else
-            {
-                //the stack is bigger "push"
-                Spawn(); //this method activates one of the pieces that was created beforehand
-                elementsWeRememberInStack = elementsCurrentlyInStacK;
-            }
-        }
+			else
+			{
+				//the stack is bigger "push"
+				Spawn(); //this method activates one of the pieces that was created beforehand
+				elementsWeRememberInStack = elementsCurrentlyInStacK;
+			}
+		}
 
 		Spawner.transform.position = originalPosition;
 
@@ -123,43 +125,45 @@ public class SpwanerStack : MonoBehaviour {
 			stackinground [4].gameObject.SetActive (true);
 			currentPosition = fifthPosition;
 		}
-    }
+	}
 
-    // activates a stack piece and changes its name this also chaning the value that it displays
-    void Spawn()
-    {
+	// activates a stack piece and changes its name this also chaning the value that it displays
+	void Spawn()
+	{
 		//if the list is empty (we reached the limit of the stack) we will display this debug message
-        if (pool.Count == 0)
-        {
-            Debug.Log("Nothing left to spawn ...");
-            return;
-        }
-        // this line obtains the value that the newest element in the stack has
-		string newtext = StackManager.getCurrentStackManager().returnLastElement();
-        // this gets the first stackpiece object that is store in the list
+		if (pool.Count == 0)
+		{
+			Debug.Log("Nothing left to spawn ...");
+			return;
+		}
+		// this line obtains the value that the newest element in the stack has
+		string newtext = QueueManager.getQueueManager().queueList.last();
+		// this gets the first stackpiece object that is store in the list
 		StackPiece next = pool.First.Value;
-        // the following two lines active the piece and changes its name to 
+		// the following two lines active the piece and changes its name to 
 		// the text of the last piece inserted into the stack respectively
 		next.transform.position = currentPosition;
 		next.gameObject.SetActive(true);
-        next.name = newtext;
+		next.name = newtext;
 		// We assign to the piece the same index number it would have in the stack so we can find it later
 		next.setIndex (StackManager.getCurrentStackManager().numberOfElements()-1);
 		// the stackpiece is removed from the stack list pool
-        pool.RemoveFirst();
-    }
+		pool.RemoveFirst();
+	}
 
 	void DeSpawn()
 	{
 		StackPiece tobeRemoved;
-
-		ch = GetComponentsInChildren<StackPiece>();
-		foreach (StackPiece tempPiece in ch)
+		cars = GetComponentsInChildren<StackPiece>();
+		for (int i = 0; i < cars.Length-1; i++) 
 		{
-			if(tempPiece.getIndex()==StackManager.getCurrentStackManager().numberOfElements())
+			cars [i].name = cars [i + 1].name;
+		}
+		foreach (StackPiece tempPiece in cars)
+		{
+			if(tempPiece.getIndex()==QueueManager.getQueueManager().queueList.size())
 			{
 				tobeRemoved = tempPiece;
-				tobeRemoved.name = "WAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 				tobeRemoved.gameObject.SetActive(false);
 				tobeRemoved.transform.position = currentPosition;
 				pool.AddLast (tobeRemoved);
@@ -170,14 +174,13 @@ public class SpwanerStack : MonoBehaviour {
 	void cleanStack()
 	{
 		StackPiece tobeRemoved;
-		ch = GetComponentsInChildren<StackPiece>();
-		foreach (StackPiece tempPiece in ch)
+		cars = GetComponentsInChildren<StackPiece>();
+		foreach (StackPiece tempPiece in cars)
 		{
-				tobeRemoved = tempPiece;
-				tobeRemoved.name = "QQQQQQQQQQQQQQQQQQQQQQQQQQqq";
-				tobeRemoved.gameObject.SetActive(false);
-				tobeRemoved.transform.position = currentPosition;
-				pool.AddLast (tobeRemoved);
+			tobeRemoved = tempPiece;
+			tobeRemoved.gameObject.SetActive(false);
+			tobeRemoved.transform.position = currentPosition;
+			pool.AddLast (tobeRemoved);
 		}
 	}
 }

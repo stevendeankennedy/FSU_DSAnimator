@@ -49,7 +49,7 @@ public class StackManager : MonoBehaviour {
     //returns a string of elements of the stack ordered by index
     public string toString()
     {
-        string stringToReturn="jbjbjb";
+		string stringToReturn = "";
         for (int i = 0; i < getCurrentStackManager().mainStack.Count; i++)
         {
             stringToReturn += mainStack[i];

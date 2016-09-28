@@ -27,7 +27,7 @@ GameObject:
   - 212: {fileID: 21287342}
   - 61: {fileID: 6153868}
   - 50: {fileID: 5045234}
-  - 114: {fileID: 11400518}
+  - 114: {fileID: 114000014076180026}
   m_Layer: 8
   m_Name: StackPiece
   m_TagString: Untagged
@@ -174,18 +174,6 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4278190080
---- !u!114 &11400518
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 128202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06d56903388f6414c8784a3cef1ee46c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  indexNumber: 99
 --- !u!212 &21228084
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -263,3 +251,15 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 128202}
   m_IsPrefabParent: 1
+--- !u!114 &114000014076180026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06d56903388f6414c8784a3cef1ee46c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indexNumber: 99

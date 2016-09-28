@@ -2,22 +2,9 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class StackButtons : MonoBehaviour {
+public class StackButtons : GeneralGUIButtons {
 
-    public InputField input;
-    public Text crazyText;
-    public Text messageToUser;
-
-    // Use this for initialization
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
+  
     // this method takes the content of the inputField and pushes it to the stack
     public void pushToStack()
     {
